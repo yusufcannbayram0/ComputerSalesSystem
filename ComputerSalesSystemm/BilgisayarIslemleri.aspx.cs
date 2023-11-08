@@ -190,24 +190,41 @@ namespace ComputerSalesSystemm
         }
         public void update()
         {
-           /* connectionOpen();
-            string sql = "update bilgisayar set KategoriId='" + TextBox2.Text + "',BilgisayarMarka='" + DropDownList1.Text + "',BilgisayarModel='" + TextBox3.Text + "'," +
-            "BİlgisayarRam='" + TextBox4.Text + "',BilgisayarRamSlot='" + TextBox5.Text + "',BilgisayarRamTipi='" + DropDownList2.Text + "',BilgisayarİşlemciNesili='" + DropDownList3.Text + "'," +
-            "BilgisayarİşlemciMarkası='" + DropDownList4.Text + "',BilgisayarİşlemciModeli='" + TextBox6.Text + "',BilgisayarEkranKartıMarkası='" + DropDownList5.Text + "',BilgisayarEkranKartıModeli='" + TextBox7.Text + "'," +
-            "BilgisayarEkranBoyutu='" + TextBox8.Text + "',BilgisayarEkranÇözünürlüğü='" + TextBox9.Text + "',BilgisayarVRAM='" + TextBox10.Text + "',BilgisayarSabitDiskTürü='" + DropDownList6.Text + "'," +
-            "BilgisayarSabitDiskMiktarı='" + TextBox11.Text + "',BilgisayarSabitDiskBoyutu='" + DropDownList8.Text + "',BilgisayarAçıklama='" + TextBox16.Text + "',BilgisayarTürü='" + TextBox7.Text + "'," +
-            "BilgisayarİşletimSistemi='" + TextBox9.Text + "'," +
-            "BilgisayarFiyat='" + TextBox12.Text + "',BilgisayarStok='" + TextBox13.Text + "'," +
-            "BilgisayarGarantiSüresi='" + TextBox14.Text + "' where BilgisayarId = '" + TextBox1.Text + "'";
-            command = new OleDbCommand(sql, connection);
-           
-                command.ExecuteNonQuery();
-           
-          
-            
-           
+            string sql = "Update bilgisayar set ";
 
-            connection.Close();*/
+            sql += "KategoriId='" + TextBox2.Text + "',";
+            sql += "BilgisayarMarka='" + DropDownList1.Text + "',";
+            sql += "BilgisayarModel='" + TextBox3.Text.Replace("'", "''") + "',";
+            sql += "BİlgisayarRam='" + TextBox4.Text + "',";
+            sql += "BilgisayarRamSlot='" + TextBox5.Text + "',";
+            sql += "BilgisayarRamTipi='" + DropDownList2.Text + "',";
+            sql += "BilgisayarİşlemciNesili='" + DropDownList3.Text + "',";
+            sql += "BilgisayarİşlemciMarkası='" + DropDownList4.Text + "',";
+            sql += "BilgisayarİşlemciModeli='" + TextBox6.Text.Replace("'", "''") + "',";
+            sql += "BilgisayarEkranKartıMarkası='" + DropDownList5.Text + "',";
+            sql += "BilgisayarEkranKartıModeli='" + TextBox7.Text.Replace("'", "''") + "',";
+            sql += "BilgisayarEkranBoyutu='" + TextBox8.Text + "',";
+            sql += "BilgisayarEkranÇözünürlüğü='" + TextBox9.Text + "',";
+            sql += "BilgisayarVRAM='" + TextBox10.Text + "',";
+            sql += "BilgisayarSabitDiskTürü='" + DropDownList6.Text + "',";
+            sql += "BilgisayarSabitDiskMiktarı='" + TextBox11.Text + "',";
+            sql += "BilgisayarSabitDiskBoyutu='" + DropDownList9.Text + "',";
+            sql += "BilgisayarAçıklama='" + TextBox16.Text.Replace("'", "''") + "',";
+            sql += "BilgisayarTürü='" + DropDownList7.Text + "',";
+            sql += "BilgisayarİşletimSistemi='" + DropDownList9.Text + "',";
+            sql += "BilgisayarFiyat='" + TextBox12.Text + "',";
+            sql += "BilgisayarStok='" + TextBox13.Text + "',";
+            sql += "BilgisayarGarantiSüresi='" + TextBox14.Text + "',";
+            sql += "BilgisayarResim='" + FileUpload1.FileName + "' ";
+
+            //sql = sql.Replace("'", "''");
+            sql += " where BilgisayarId=" + TextBox1.Text; // güncelleme kriteri bilgisayarid
+
+            connection.Open();
+            command = new OleDbCommand(sql, connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+            fillListView("Select * from bilgisayar");
 
 
         }
